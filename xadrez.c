@@ -29,6 +29,15 @@ int main() {
     // Inclua o uso de continue e break dentro dos loops.
 
  // Movimento da Torre: 5 casas para a direita (usando for)
+   #include <stdio.h>
+
+/*
+ * Programa: Simulação de movimentos de peças de xadrez.
+ * Peças: Torre, Bispo, Rainha e Cavalo.
+ * Objetivo: Usar estruturas de repetição para simular movimentos no tabuleiro.
+ * Autor: Hênio Fontes
+ */
+    // Movimento da Torre: 5 casas para a direita (usando for)
     int casasTorre = 5;
     printf("Movimento da Torre:\n");
     for (int i = 1; i <= casasTorre; i++) {
@@ -54,6 +63,27 @@ int main() {
         printf("Esquerda\n");
         contadorRainha++;
     } while (contadorRainha <= casasRainha);
-   
+    printf("\n");  // Separação entre as peças
+
+    // Movimento do Cavalo: 2 casas para baixo + 1 casa para a esquerda (movimento em "L")
+    int casasBaixo = 2;
+    int casasEsquerda = 1;
+    printf("Movimento do Cavalo:\n");
+
+    // Loop externo (for): movimenta 2 casas para baixo
+    for (int i = 1; i <= casasBaixo; i++) {
+        printf("Baixo\n");
+
+        // Loop interno (while): após cada movimento para baixo, verifica se é a última repetição
+        // e executa a parte final do movimento (1 casa para a esquerda)
+        if (i == casasBaixo) {  // só move para a esquerda depois de descer 2 vezes
+            int j = 1;
+            while (j <= casasEsquerda) {
+                printf("Esquerda\n");
+                j++;
+            }
+        }
+    }
+
     return 0;
 }
