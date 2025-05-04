@@ -29,58 +29,88 @@ int main() {
     // Inclua o uso de continue e break dentro dos loops.
 
  // Movimento da Torre: 5 casas para a direita (usando for)
-   #include <stdio.h>
+#include <stdio.h>
 
 /*
- * Programa: Simulação de movimentos de peças de xadrez.
+ * Programa: Simulação avançada de movimentos de peças de xadrez.
  * Peças: Torre, Bispo, Rainha e Cavalo.
- * Objetivo: Usar estruturas de repetição para simular movimentos no tabuleiro.
- * Autor: Hênio Fontes
+ * Objetivo: Usar recursividade e loops complexos para simular movimentos.
+ * Autor: Hênio
  */
-    // Movimento da Torre: 5 casas para a direita (usando for)
+
+// Função recursiva para movimentar a Torre (horizontalmente para a direita)
+int moverTorre(int casasRestantes) {
+    if (casasRestantes == 0) return 0;
+    printf("Direita\n");
+    return moverTorre(casasRestantes - 1);
+}
+
+// Função recursiva para movimentar a Rainha (horizontalmente para a esquerda)
+int moverRainha(int casasRestantes) {
+    if (casasRestantes == 0) return 0;
+    printf("Esquerda\n");
+    return moverRainha(casasRestantes - 1);
+}
+
+// Função recursiva para movimentar o Bispo (diagonal: cima e direita)
+// Inclui loops aninhados para ilustrar cada passo da diagonal (vertical + horizontal)
+int moverBispo(int casasRestantes) {
+    if (casasRestantes == 0) return 0;
+
+    // Loop externo: vertical (Cima)
+    for (int i = 1; i <= 1; i++) {
+        printf("Cima\n");
+
+        // Loop interno: horizontal (Direita)
+        for (int j = 1; j <= 1; j++) {
+            printf("Direita\n");
+        }
+    }
+
+    // Chamada recursiva para a próxima casa na diagonal
+    return moverBispo(casasRestantes - 1);
+}
+
+int main() {
+    // Movimento da Torre: 5 casas para a direita
     int casasTorre = 5;
     printf("Movimento da Torre:\n");
-    for (int i = 1; i <= casasTorre; i++) {
-        printf("Direita\n");
-    }
+    moverTorre(casasTorre);
     printf("\n");  // Separação entre as peças
 
-    // Movimento do Bispo: 5 casas na diagonal (cima e direita) (usando while)
+    // Movimento do Bispo: 5 casas na diagonal (cima e direita)
     int casasBispo = 5;
-    int contadorBispo = 1;
     printf("Movimento do Bispo:\n");
-    while (contadorBispo <= casasBispo) {
-        printf("Cima Direita\n");
-        contadorBispo++;
-    }
+    moverBispo(casasBispo);
     printf("\n");  // Separação entre as peças
 
-    // Movimento da Rainha: 8 casas para a esquerda (usando do-while)
+    // Movimento da Rainha: 8 casas para a esquerda
     int casasRainha = 8;
-    int contadorRainha = 1;
     printf("Movimento da Rainha:\n");
-    do {
-        printf("Esquerda\n");
-        contadorRainha++;
-    } while (contadorRainha <= casasRainha);
+    moverRainha(casasRainha);
     printf("\n");  // Separação entre as peças
 
-    // Movimento do Cavalo: 2 casas para baixo + 1 casa para a esquerda (movimento em "L")
-    int casasBaixo = 2;
-    int casasEsquerda = 1;
+    // Movimento do Cavalo: 2 casas para cima + 1 casa para a direita (movimento em "L")
+    int casasCavaloVertical = 2;
+    int casasCavaloHorizontal = 1;
     printf("Movimento do Cavalo:\n");
 
-    // Loop externo (for): movimenta 2 casas para baixo
-    for (int i = 1; i <= casasBaixo; i++) {
-        printf("Baixo\n");
+    // Loop externo: vertical (Cima)
+    for (int i = 1, salto = 0; i <= casasCavaloVertical; i++) {
+        if (i == 2) {
+            // Simulando um obstáculo imaginário para demonstrar uso de 'continue'
+            printf("Cima (Salto Especial)\n");
+            salto = 1;
+            continue;
+        }
+        printf("Cima\n");
 
-        // Loop interno (while): após cada movimento para baixo, verifica se é a última repetição
-        // e executa a parte final do movimento (1 casa para a esquerda)
-        if (i == casasBaixo) {  // só move para a esquerda depois de descer 2 vezes
-            int j = 1;
-            while (j <= casasEsquerda) {
-                printf("Esquerda\n");
-                j++;
+        // Loop interno: horizontal (Direita)
+        for (int j = 1; j <= casasCavaloHorizontal; j++) {
+            if (salto) {
+                // Simulando que só move para a direita se o salto ocorreu
+                printf("Direita\n");
+                break;  // Sai do loop interno após mover para a direita
             }
         }
     }
